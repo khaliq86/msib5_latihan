@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas Pertemuan 2</title>
+    <style>
+        *{
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .container{
+            flex-direction: row;
+            display: flex;
+            justify-content: space-between;
+            max-width: 900px;
+            margin: 30px auto;
+        }
+        .form-input{
+            width: 80%;
+
+        }
+        label{
+            font-size: 20px;
+            font-weight: bolder;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input{
+            width: 93%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+        input:hover{
+            border: 2px solid #29ea96;
+            transition: 100ms;
+        }
+        input:active{
+            border: 2px solid #29ea96;
+        }
+        select{
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        select:hover{
+            border: 1px solid #29ea96;
+            background-color: #29ea96;
+            transition: 10ms;
+        }
+        button{
+            padding: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            border-radius: 10px;
+            border: 0;
+            background-color: #29ea96;
+        }
+
+        button:hover{
+            box-shadow: #6f6666 2px 1px 1px 1px;
+            transform: scale(1.1);
+            transition: 100ms ;
+        }
+
+        .hasil{
+            max-width: 100%;   ;
+            margin: 30px;
+            font-size: 15px;
+            padding-left: 70px;
+        }
+
+        table,tr,th,td{
+            border-collapse: collapse;
+            padding: 10px;
+        }
+        th{
+            background-color: #29ea96;
+            padding-left: 20px;
+            padding-right: 20px;
+            width: 25%;
+        }
+        tr,td{
+            border: 1px solid #4a4444;
+        }
+        td{
+            text-align: center;
+            width: 25%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-input">
+            <h1>Hitung Nilai Mahasiswa</h1>
+            <label for="nama">Nama </label>
+            <input type="text" name="nama" placeholder="Nama Lengkap" id="nama" required><br>
+
+            <label for="matkul">Mata Kuliah </label>
+            <input type="text" name="matkul" placeholder="Mata Kuliah" id="matkul" required><br>
+
+            <label for="grade">Grade </label>
+            <select id="grade" style="width: 100%;" required>
+                <option value="">Pilih Grade</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="E">E</option>
+            </select>
+            <br>
+            <button type="button" onclick="calculateAverage()" style="width: 100%;">Hitung</button>
+        </div>
+        <div class="hasil">
+            <table id="hasil" style="width: 400px;">
+                <tr>
+                    <th>Nama</th>
+                    <th>Mata Kuliah</th>
+                    <th>Grade</th>
+                    <th>Nilai Rata-Rata</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script>
+        function calculateAverage() {
+            const gradeValues = { 
+              A: 4, 
+              B: 3, 
+              C: 2, 
+              D: 1, 
+              E: 0
+            };
+            let nama = document.getElementById("nama").value;
+            let matkul = document.getElementById("matkul").value;
+            let grade = document.getElementById("grade").value;
+
+            if (nama == "") {
+                alert("Nama tidak boleh kosong");
+                return;
+            }
+            if (matkul == "") {
+                alert("Mata Kuliah tidak boleh kosong");
+                return;
+            }
+            if (grade == "") {
+                alert("Grade tidak boleh kosong");
+                return;
+            }
+
+            if (grade in gradeValues) {
+                const gradeValue = gradeValues[grade];
+                console.log("gradeValue : ", gradeValue);
+                const resultTable = document.getElementById("hasil");
+
+                const newRow = resultTable.insertRow(-1);
+                newRow.insertCell(0).innerHTML = nama;
+                newRow.insertCell(1).innerHTML = matkul;
+                newRow.insertCell(2).innerHTML = grade;
+                newRow.insertCell(3).innerHTML = gradeValue.toFixed(2);
+            } else {
+                alert("Pilih Grade dengan benar");
+            }
+        }
+    </script>
+</body>
+</html>
